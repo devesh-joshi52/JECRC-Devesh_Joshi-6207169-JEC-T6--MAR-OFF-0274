@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<robot generator="Robot 7.4.2 (Python 3.13.5 on win32)" generated="2026-03-28T13:17:59.147626" rpa="false" schemaversion="5">
+<suite id="s1" name="Screenshots" source="C:\Users\jdeve\OneDrive\Desktop\Python-Capg\Robot_framework\Sat, 28-March-2026\screenshots.robot">
+<test id="s1-t1" name="Screenshots" line="8">
+<kw name="Set Screenshot Directory" owner="SeleniumLibrary">
+<arg>C:\\Users\\jdeve\\OneDrive\\Desktop\\Python-Capg\\Robot_framework\\Sat, 28-March-2026/Screenshots</arg>
+<doc>Sets the directory for captured screenshots.</doc>
+<status status="PASS" start="2026-03-28T13:17:59.584224" elapsed="0.001040"/>
+</kw>
+<kw name="Open Browser" owner="SeleniumLibrary">
+<msg time="2026-03-28T13:17:59.585893" level="INFO">Opening browser 'chrome' to base url 'https://in.bookmyshow.com/explore/home/jaipur'.</msg>
+<arg>${url}</arg>
+<arg>chrome</arg>
+<doc>Opens a new browser instance to the optional ``url``.</doc>
+<status status="PASS" start="2026-03-28T13:17:59.585649" elapsed="4.565088"/>
+</kw>
+<kw name="Maximize Browser Window" owner="SeleniumLibrary">
+<doc>Maximizes current browser window.</doc>
+<status status="PASS" start="2026-03-28T13:18:04.151317" elapsed="0.563633"/>
+</kw>
+<kw name="Sleep" owner="BuiltIn">
+<msg time="2026-03-28T13:18:06.716797" level="INFO">Slept 2 seconds.</msg>
+<arg>2s</arg>
+<doc>Pauses the test executed for the given time.</doc>
+<status status="PASS" start="2026-03-28T13:18:04.716043" elapsed="2.000898"/>
+</kw>
+<kw name="Capture Page Screenshot" owner="SeleniumLibrary">
+<msg time="2026-03-28T13:18:06.837445" level="INFO" html="true">&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td colspan="3"&gt;&lt;a href="../Screenshots/fullpage.png"&gt;&lt;img src="../Screenshots/fullpage.png" width="800px"&gt;&lt;/a&gt;</msg>
+<arg>fullpage.png</arg>
+<doc>Takes a screenshot of the current page and embeds it into a log file.</doc>
+<status status="PASS" start="2026-03-28T13:18:06.717609" elapsed="0.119958"/>
+</kw>
+<kw name="Scroll Element Into View" owner="SeleniumLibrary">
+<arg>xpath=//div[text()="Project Hail Mary"]</arg>
+<doc>Scrolls the element identified by ``locator`` into view.</doc>
+<status status="PASS" start="2026-03-28T13:18:06.837884" elapsed="0.316058"/>
+</kw>
+<kw name="Sleep" owner="BuiltIn">
+<msg time="2026-03-28T13:18:09.156108" level="INFO">Slept 2 seconds.</msg>
+<arg>2s</arg>
+<doc>Pauses the test executed for the given time.</doc>
+<status status="PASS" start="2026-03-28T13:18:07.155404" elapsed="2.000962"/>
+</kw>
+<kw name="Capture Element Screenshot" owner="SeleniumLibrary">
+<msg time="2026-03-28T13:18:09.293161" level="INFO" html="true">&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td colspan="3"&gt;&lt;a href="../Screenshots/Ryan_Gosling.png"&gt;&lt;img src="../Screenshots/Ryan_Gosling.png" width="400px"&gt;&lt;/a&gt;</msg>
+<arg>xpath=//img[@alt="Project Hail Mary"]</arg>
+<arg>Ryan_Gosling.png</arg>
+<doc>Captures a screenshot from the element identified by ``locator`` and embeds it into log file.</doc>
+<status status="PASS" start="2026-03-28T13:18:09.157348" elapsed="0.135936"/>
+</kw>
+<kw name="Sleep" owner="BuiltIn">
+<msg time="2026-03-28T13:18:11.294435" level="INFO">Slept 2 seconds.</msg>
+<arg>2s</arg>
+<doc>Pauses the test executed for the given time.</doc>
+<status status="PASS" start="2026-03-28T13:18:09.293660" elapsed="2.001028"/>
+</kw>
+<kw name="Close Browser" owner="SeleniumLibrary">
+<doc>Closes the current browser.</doc>
+<status status="PASS" start="2026-03-28T13:18:11.295230" elapsed="2.215980"/>
+</kw>
+<status status="PASS" start="2026-03-28T13:17:59.583153" elapsed="13.928654"/>
+</test>
+<status status="PASS" start="2026-03-28T13:17:59.149488" elapsed="14.363243"/>
+</suite>
+<statistics>
+<total>
+<stat pass="1" fail="0" skip="0">All Tests</stat>
+</total>
+<tag>
+</tag>
+<suite>
+<stat name="Screenshots" id="s1" pass="1" fail="0" skip="0">Screenshots</stat>
+</suite>
+</statistics>
+<errors>
+</errors>
+</robot>
