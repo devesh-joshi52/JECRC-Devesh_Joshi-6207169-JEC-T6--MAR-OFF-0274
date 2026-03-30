@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<robot generator="Robot 7.4.2 (Python 3.13.5 on win32)" generated="2026-03-30T16:29:30.388845" rpa="false" schemaversion="5">
+<suite id="s1" name="Task 3" source="C:\Users\jdeve\OneDrive\Desktop\Python-Capg\Robot_framework\Mon, 30-March-2026\task_3.robot">
+<test id="s1-t1" name="Amazon End to End" line="20">
+<kw name="Open Browser" owner="SeleniumLibrary">
+<msg time="2026-03-30T16:29:30.841735" level="INFO">Opening browser 'chrome' to base url 'https://amazon.in'.</msg>
+<arg>${url}</arg>
+<arg>chrome</arg>
+<doc>Opens a new browser instance to the optional ``url``.</doc>
+<status status="PASS" start="2026-03-30T16:29:30.841319" elapsed="2.705967"/>
+</kw>
+<kw name="Maximize Browser Window" owner="SeleniumLibrary">
+<doc>Maximizes current browser window.</doc>
+<status status="PASS" start="2026-03-30T16:29:33.548035" elapsed="0.040055"/>
+</kw>
+<kw name="Wait Until Element Is Visible" owner="SeleniumLibrary">
+<arg>xpath=//a[contains(text(), "Electronics")]</arg>
+<doc>Waits until the element ``locator`` is visible.</doc>
+<status status="PASS" start="2026-03-30T16:29:33.588567" elapsed="12.899853"/>
+</kw>
+<kw name="Click Element" owner="SeleniumLibrary">
+<msg time="2026-03-30T16:29:46.489626" level="INFO">Clicking element 'xpath=//a[contains(text(), "Electronics")]'.</msg>
+<arg>xpath=//a[contains(text(), "Electronics")]</arg>
+<doc>Click the element identified by ``locator``.</doc>
+<status status="PASS" start="2026-03-30T16:29:46.489108" elapsed="2.370299"/>
+</kw>
+<kw name="Click Element" owner="SeleniumLibrary">
+<msg time="2026-03-30T16:29:48.860391" level="INFO">Clicking element 'xpath=(//i[@class="a-icon a-icon-checkbox"])[7]'.</msg>
+<arg>xpath=(//i[@class="a-icon a-icon-checkbox"])[7]</arg>
+<doc>Click the element identified by ``locator``.</doc>
+<status status="PASS" start="2026-03-30T16:29:48.860005" elapsed="2.502122"/>
+</kw>
+<kw name="Sleep" owner="BuiltIn">
+<msg time="2026-03-30T16:29:54.363589" level="INFO">Slept 3 seconds.</msg>
+<arg>3s</arg>
+<doc>Pauses the test executed for the given time.</doc>
+<status status="PASS" start="2026-03-30T16:29:51.362674" elapsed="3.001156"/>
+</kw>
+<kw name="Wait Until Element Is Visible" owner="SeleniumLibrary">
+<arg>xpath=(//h2//span)[5]</arg>
+<doc>Waits until the element ``locator`` is visible.</doc>
+<status status="PASS" start="2026-03-30T16:29:54.364591" elapsed="0.043184"/>
+</kw>
+<kw name="Get Text" owner="SeleniumLibrary">
+<msg time="2026-03-30T16:29:54.440671" level="INFO">${name} = Boat Bassheads 300C Wired Earphones,Type-C Jack, 10mm Drivers, Signature Sound, in-Line Microphone, Integrated Controls, Voice Assistant &amp; 120cm Cable (Active Black)</msg>
+<var>${name}</var>
+<arg>xpath=(//h2//span)[5]</arg>
+<doc>Returns the text value of the element identified by ``locator``.</doc>
+<status status="PASS" start="2026-03-30T16:29:54.408228" elapsed="0.032513"/>
+</kw>
+<kw name="Log To Console" owner="BuiltIn">
+<arg>${name}</arg>
+<doc>Logs the given message to the console.</doc>
+<status status="PASS" start="2026-03-30T16:29:54.441206" elapsed="0.000771"/>
+</kw>
+<kw name="Click Element" owner="SeleniumLibrary">
+<msg time="2026-03-30T16:29:54.443050" level="INFO">Clicking element 'xpath=(//h2//span)[5]'.</msg>
+<arg>xpath=(//h2//span)[5]</arg>
+<doc>Click the element identified by ``locator``.</doc>
+<status status="PASS" start="2026-03-30T16:29:54.442750" elapsed="0.272342"/>
+</kw>
+<kw name="Switch Window" owner="SeleniumLibrary">
+<arg>NEW</arg>
+<doc>Switches to browser window matching ``locator``.</doc>
+<status status="PASS" start="2026-03-30T16:29:54.715579" elapsed="0.018899"/>
+</kw>
+<kw name="Wait Until Page Contains" owner="SeleniumLibrary">
+<arg>${name}</arg>
+<doc>Waits until ``text`` appears on the current page.</doc>
+<status status="PASS" start="2026-03-30T16:29:54.734952" elapsed="3.682361"/>
+</kw>
+<kw name="Get Text" owner="SeleniumLibrary">
+<msg time="2026-03-30T16:29:58.674058" level="INFO">${actual_price} = </msg>
+<var>${actual_price}</var>
+<arg>xpath=//span[@class='a-size-small aok-offscreen']</arg>
+<doc>Returns the text value of the element identified by ``locator``.</doc>
+<status status="PASS" start="2026-03-30T16:29:58.418021" elapsed="0.256203"/>
+</kw>
+<kw name="Log To Console" owner="BuiltIn">
+<arg>Actual Price: ${actual_price}</arg>
+<doc>Logs the given message to the console.</doc>
+<status status="PASS" start="2026-03-30T16:29:58.676452" elapsed="0.000889"/>
+</kw>
+<kw name="Get Text" owner="SeleniumLibrary">
+<msg time="2026-03-30T16:29:58.754213" level="INFO">${discount_price} = 499</msg>
+<var>${discount_price}</var>
+<arg>xpath=(//span[@class='a-price-whole'])[6]</arg>
+<doc>Returns the text value of the element identified by ``locator``.</doc>
+<status status="PASS" start="2026-03-30T16:29:58.678092" elapsed="0.076195"/>
+</kw>
+<kw name="Log To Console" owner="BuiltIn">
+<arg>Discounted Price: ${discount_price}</arg>
+<doc>Logs the given message to the console.</doc>
+<status status="PASS" start="2026-03-30T16:29:58.755034" elapsed="0.008318"/>
+</kw>
+<kw name="Get Text" owner="SeleniumLibrary">
+<msg time="2026-03-30T16:29:58.816819" level="INFO">${discount_percent} = -50%</msg>
+<var>${discount_percent}</var>
+<arg>xpath=//span[@class="apex-savings-container"]//child::span</arg>
+<doc>Returns the text value of the element identified by ``locator``.</doc>
+<status status="PASS" start="2026-03-30T16:29:58.766623" elapsed="0.050262"/>
+</kw>
+<kw name="Log" owner="BuiltIn">
+<msg time="2026-03-30T16:29:58.818275" level="INFO">Discount: -50%</msg>
+<arg>Discount: ${discount_percent}</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="PASS" start="2026-03-30T16:29:58.817730" elapsed="0.000629"/>
+</kw>
+<kw name="Scroll Element Into View" owner="SeleniumLibrary">
+<arg>xpath=//input[@id='add-to-cart-button']</arg>
+<doc>Scrolls the element identified by ``locator`` into view.</doc>
+<status status="PASS" start="2026-03-30T16:29:58.818756" elapsed="0.379292"/>
+</kw>
+<kw name="Click Button" owner="SeleniumLibrary">
+<msg time="2026-03-30T16:29:59.199050" level="INFO">Clicking button 'add-to-cart-button'.</msg>
+<arg>add-to-cart-button</arg>
+<doc>Clicks the button identified by ``locator``.</doc>
+<status status="PASS" start="2026-03-30T16:29:59.198663" elapsed="0.355719"/>
+</kw>
+<kw name="Wait Until Element Is Visible" owner="SeleniumLibrary">
+<msg time="2026-03-30T16:30:04.758064" level="INFO" html="true">&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td colspan="3"&gt;&lt;a href="selenium-screenshot-32.png"&gt;&lt;img src="selenium-screenshot-32.png" width="800px"&gt;&lt;/a&gt;</msg>
+<msg time="2026-03-30T16:30:04.758376" level="FAIL">Element 'xpath=//span[@id='nav-cart-count']' not visible after 5 seconds.</msg>
+<arg>xpath=//span[@id='nav-cart-count']</arg>
+<doc>Waits until the element ``locator`` is visible.</doc>
+<status status="FAIL" start="2026-03-30T16:29:59.554957" elapsed="5.206207">Element 'xpath=//span[@id='nav-cart-count']' not visible after 5 seconds.</status>
+</kw>
+<kw name="Click Element" owner="SeleniumLibrary">
+<arg>xpath=//span[@id='nav-cart-count']</arg>
+<doc>Click the element identified by ``locator``.</doc>
+<status status="NOT RUN" start="2026-03-30T16:30:04.762079" elapsed="0.000128"/>
+</kw>
+<kw name="Wait Until Page Contains" owner="SeleniumLibrary">
+<arg>${name}</arg>
+<doc>Waits until ``text`` appears on the current page.</doc>
+<status status="NOT RUN" start="2026-03-30T16:30:04.762796" elapsed="0.000095"/>
+</kw>
+<kw name="Log To Console" owner="BuiltIn">
+<arg>Product successfully added to cart</arg>
+<doc>Logs the given message to the console.</doc>
+<status status="NOT RUN" start="2026-03-30T16:30:04.763439" elapsed="0.000091"/>
+</kw>
+<kw name="Close Browser" owner="SeleniumLibrary">
+<doc>Closes the current browser.</doc>
+<status status="NOT RUN" start="2026-03-30T16:30:04.764065" elapsed="0.000082"/>
+</kw>
+<status status="FAIL" start="2026-03-30T16:29:30.838750" elapsed="33.926612">Element 'xpath=//span[@id='nav-cart-count']' not visible after 5 seconds.</status>
+</test>
+<status status="FAIL" start="2026-03-30T16:29:30.391453" elapsed="34.376634"/>
+</suite>
+<statistics>
+<total>
+<stat pass="0" fail="1" skip="0">All Tests</stat>
+</total>
+<tag>
+</tag>
+<suite>
+<stat name="Task 3" id="s1" pass="0" fail="1" skip="0">Task 3</stat>
+</suite>
+</statistics>
+<errors>
+</errors>
+</robot>
