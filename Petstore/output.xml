@@ -1,0 +1,431 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<robot generator="Robot 7.4.2 (Python 3.13.5 on win32)" generated="2026-04-28T15:22:02.723862" rpa="false" schemaversion="5">
+<suite id="s1" name="Pet" source="C:\Users\jdeve\OneDrive\Desktop\Api_using_robot\Petstore\pet.robot">
+<test id="s1-t1" name="Add Pet" line="11">
+<kw name="Create Session" owner="RequestsLibrary">
+<msg time="2026-04-28T15:22:03.789477" level="INFO">Creating Session using : alias=petapi, url=https://petstore.swagger.io/v2, headers={},                     cookies={}, auth=None, timeout=None, proxies=None, verify=True,                     debug=0 </msg>
+<arg>petapi</arg>
+<arg>${BASE_URL}</arg>
+<arg>verify=True</arg>
+<doc>Create Session: create a HTTP session to a server</doc>
+<status status="PASS" start="2026-04-28T15:22:03.788961" elapsed="0.000858"/>
+</kw>
+<kw name="Load Json From File" owner="JSONLibrary">
+<msg time="2026-04-28T15:22:03.791573" level="INFO">${payload} = {'id': 55, 'category': {'id': 55, 'name': 'ubantu'}, 'name': 'ubantu', 'photoUrls': ['string'], 'tags': [{'id': 55, 'name': 'ubantu'}], 'status': 'available'}</msg>
+<var>${payload}</var>
+<arg>C:\\Users\\jdeve\\OneDrive\\Desktop\\Api_using_robot\\Petstore/../data/add_pet.json</arg>
+<doc>Load JSON from file.</doc>
+<status status="PASS" start="2026-04-28T15:22:03.790538" elapsed="0.001118"/>
+</kw>
+<kw name="POST On Session" owner="RequestsLibrary">
+<msg time="2026-04-28T15:22:05.605943" level="INFO">POST Request : url=https://petstore.swagger.io/v2/pet 
+ path_url=/v2/pet 
+ headers={'User-Agent': 'python-requests/2.32.4', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'Content-Length': '158', 'Content-Type': 'application/json'} 
+ body=b'{"id": 55, "category": {"id": 55, "name": "ubantu"}, "name": "ubantu", "photoUrls": ["string"], "tags": [{"id": 55, "name": "ubantu"}], "status": "available"}' 
+ </msg>
+<msg time="2026-04-28T15:22:05.606104" level="INFO">POST Response : url=https://petstore.swagger.io/v2/pet 
+ status=200, reason=OK 
+ headers={'Date': 'Tue, 28 Apr 2026 09:52:04 GMT', 'Content-Type': 'application/json', 'Transfer-Encoding': 'chunked', 'Connection': 'keep-alive', 'Access-Control-Allow-Origin': '*', 'Access-Control-Allow-Methods': 'GET, POST, DELETE, PUT', 'Access-Control-Allow-Headers': 'Content-Type, api_key, Authorization', 'Server': 'Jetty(9.2.9.v20150224)'} 
+ body={"id":55,"category":{"id":55,"name":"ubantu"},"name":"ubantu","photoUrls":["string"],"tags":[{"id":55,"name":"ubantu"}],"status":"available"} 
+ </msg>
+<msg time="2026-04-28T15:22:05.606283" level="INFO">${response} = &lt;Response [200]&gt;</msg>
+<var>${response}</var>
+<arg>petapi</arg>
+<arg>/pet</arg>
+<arg>json=${payload}</arg>
+<doc>Sends a POST request on a previously created HTTP Session.</doc>
+<status status="PASS" start="2026-04-28T15:22:03.792314" elapsed="1.814010"/>
+</kw>
+<kw name="Should Be Equal As Integers" owner="BuiltIn">
+<msg time="2026-04-28T15:22:05.608388" level="INFO">Argument types are:
+&lt;class 'int'&gt;
+&lt;class 'str'&gt;</msg>
+<arg>${response.status_code}</arg>
+<arg>200</arg>
+<doc>Fails if objects are unequal after converting them to integers.</doc>
+<status status="PASS" start="2026-04-28T15:22:05.607414" elapsed="0.001064"/>
+</kw>
+<kw name="Log To Console" owner="BuiltIn">
+<arg>${response.json()}</arg>
+<doc>Logs the given message to the console.</doc>
+<status status="PASS" start="2026-04-28T15:22:05.609359" elapsed="0.001046"/>
+</kw>
+<kw name="Set Variable" owner="BuiltIn">
+<msg time="2026-04-28T15:22:05.612044" level="INFO">${body} = {'id': 55, 'category': {'id': 55, 'name': 'ubantu'}, 'name': 'ubantu', 'photoUrls': ['string'], 'tags': [{'id': 55, 'name': 'ubantu'}], 'status': 'available'}</msg>
+<var>${body}</var>
+<arg>${response.json()}</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<status status="PASS" start="2026-04-28T15:22:05.611149" elapsed="0.000935"/>
+</kw>
+<kw name="Should Be Equal As Integers" owner="BuiltIn">
+<msg time="2026-04-28T15:22:05.613142" level="INFO">Argument types are:
+&lt;class 'int'&gt;
+&lt;class 'str'&gt;</msg>
+<arg>${body}[id]</arg>
+<arg>55</arg>
+<doc>Fails if objects are unequal after converting them to integers.</doc>
+<status status="PASS" start="2026-04-28T15:22:05.612712" elapsed="0.000536"/>
+</kw>
+<kw name="Should Be Equal As Strings" owner="BuiltIn">
+<arg>${body}[name]</arg>
+<arg>ubantu</arg>
+<doc>Fails if objects are unequal after converting them to strings.</doc>
+<status status="PASS" start="2026-04-28T15:22:05.613949" elapsed="0.000468"/>
+</kw>
+<kw name="Set Suite Variable" owner="BuiltIn">
+<msg time="2026-04-28T15:22:05.616223" level="INFO">${PET_ID} = 55</msg>
+<arg>${PET_ID}</arg>
+<arg>${body}[id]</arg>
+<doc>Makes a variable available everywhere within the scope of the current suite.</doc>
+<status status="PASS" start="2026-04-28T15:22:05.615058" elapsed="0.001228"/>
+</kw>
+<doc>Add a new pet to the store</doc>
+<status status="PASS" start="2026-04-28T15:22:03.786767" elapsed="1.830634"/>
+</test>
+<test id="s1-t2" name="Update Pet" line="28">
+<kw name="Create Session" owner="RequestsLibrary">
+<msg time="2026-04-28T15:22:05.620580" level="INFO">Creating Session using : alias=petapi, url=https://petstore.swagger.io/v2, headers={},                     cookies={}, auth=None, timeout=None, proxies=None, verify=True,                     debug=0 </msg>
+<arg>petapi</arg>
+<arg>${BASE_URL}</arg>
+<arg>verify=True</arg>
+<doc>Create Session: create a HTTP session to a server</doc>
+<status status="PASS" start="2026-04-28T15:22:05.620258" elapsed="0.000558"/>
+</kw>
+<kw name="Load Json From File" owner="JSONLibrary">
+<msg time="2026-04-28T15:22:05.622240" level="INFO">${payload} = {'id': 55, 'category': {'id': 55, 'name': 'Updated'}, 'name': 'Updated', 'photoUrls': ['string'], 'tags': [{'id': 55, 'name': 'updated'}], 'status': 'sold'}</msg>
+<var>${payload}</var>
+<arg>C:\\Users\\jdeve\\OneDrive\\Desktop\\Api_using_robot\\Petstore/../data/updated_pet.json</arg>
+<doc>Load JSON from file.</doc>
+<status status="PASS" start="2026-04-28T15:22:05.621499" elapsed="0.000814"/>
+</kw>
+<kw name="PUT On Session" owner="RequestsLibrary">
+<msg time="2026-04-28T15:22:07.315530" level="INFO">PUT Request : url=https://petstore.swagger.io/v2/pet 
+ path_url=/v2/pet 
+ headers={'User-Agent': 'python-requests/2.32.4', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'Content-Length': '156', 'Content-Type': 'application/json'} 
+ body=b'{"id": 55, "category": {"id": 55, "name": "Updated"}, "name": "Updated", "photoUrls": ["string"], "tags": [{"id": 55, "name": "updated"}], "status": "sold"}' 
+ </msg>
+<msg time="2026-04-28T15:22:07.315678" level="INFO">PUT Response : url=https://petstore.swagger.io/v2/pet 
+ status=200, reason=OK 
+ headers={'Date': 'Tue, 28 Apr 2026 09:52:06 GMT', 'Content-Type': 'application/json', 'Transfer-Encoding': 'chunked', 'Connection': 'keep-alive', 'Access-Control-Allow-Origin': '*', 'Access-Control-Allow-Methods': 'GET, POST, DELETE, PUT', 'Access-Control-Allow-Headers': 'Content-Type, api_key, Authorization', 'Server': 'Jetty(9.2.9.v20150224)'} 
+ body={"id":55,"category":{"id":55,"name":"Updated"},"name":"Updated","photoUrls":["string"],"tags":[{"id":55,"name":"updated"}],"status":"sold"} 
+ </msg>
+<msg time="2026-04-28T15:22:07.315870" level="INFO">${response} = &lt;Response [200]&gt;</msg>
+<var>${response}</var>
+<arg>petapi</arg>
+<arg>/pet</arg>
+<arg>json=${payload}</arg>
+<doc>Sends a PUT request on a previously created HTTP Session.</doc>
+<status status="PASS" start="2026-04-28T15:22:05.624553" elapsed="1.691351"/>
+</kw>
+<kw name="Should Be Equal As Integers" owner="BuiltIn">
+<msg time="2026-04-28T15:22:07.317604" level="INFO">Argument types are:
+&lt;class 'int'&gt;
+&lt;class 'str'&gt;</msg>
+<arg>${response.status_code}</arg>
+<arg>200</arg>
+<doc>Fails if objects are unequal after converting them to integers.</doc>
+<status status="PASS" start="2026-04-28T15:22:07.316736" elapsed="0.000949"/>
+</kw>
+<kw name="Set Variable" owner="BuiltIn">
+<msg time="2026-04-28T15:22:07.319241" level="INFO">${body} = {'id': 55, 'category': {'id': 55, 'name': 'Updated'}, 'name': 'Updated', 'photoUrls': ['string'], 'tags': [{'id': 55, 'name': 'updated'}], 'status': 'sold'}</msg>
+<var>${body}</var>
+<arg>${response.json()}</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<status status="PASS" start="2026-04-28T15:22:07.318371" elapsed="0.001227"/>
+</kw>
+<kw name="Should Be Equal As Integers" owner="BuiltIn">
+<msg time="2026-04-28T15:22:07.321217" level="INFO">Argument types are:
+&lt;class 'int'&gt;
+&lt;class 'str'&gt;</msg>
+<arg>${body}[id]</arg>
+<arg>55</arg>
+<doc>Fails if objects are unequal after converting them to integers.</doc>
+<status status="PASS" start="2026-04-28T15:22:07.320448" elapsed="0.000934"/>
+</kw>
+<kw name="Should Be Equal As Strings" owner="BuiltIn">
+<arg>${body}[name]</arg>
+<arg>Updated</arg>
+<doc>Fails if objects are unequal after converting them to strings.</doc>
+<status status="PASS" start="2026-04-28T15:22:07.322123" elapsed="0.000490"/>
+</kw>
+<kw name="Should Be Equal As Strings" owner="BuiltIn">
+<arg>${body}[status]</arg>
+<arg>sold</arg>
+<doc>Fails if objects are unequal after converting them to strings.</doc>
+<status status="PASS" start="2026-04-28T15:22:07.323556" elapsed="0.000584"/>
+</kw>
+<kw name="Log To Console" owner="BuiltIn">
+<arg>${body}</arg>
+<doc>Logs the given message to the console.</doc>
+<status status="PASS" start="2026-04-28T15:22:07.324754" elapsed="0.000642"/>
+</kw>
+<doc>Update an existing pet in the store</doc>
+<status status="PASS" start="2026-04-28T15:22:05.619511" elapsed="1.707457"/>
+</test>
+<test id="s1-t3" name="Get Pet By ID" line="44">
+<kw name="Create Session" owner="RequestsLibrary">
+<msg time="2026-04-28T15:22:07.329470" level="INFO">Creating Session using : alias=petapi, url=https://petstore.swagger.io/v2, headers={},                     cookies={}, auth=None, timeout=None, proxies=None, verify=True,                     debug=0 </msg>
+<arg>petapi</arg>
+<arg>${BASE_URL}</arg>
+<arg>verify=True</arg>
+<doc>Create Session: create a HTTP session to a server</doc>
+<status status="PASS" start="2026-04-28T15:22:07.329153" elapsed="0.000566"/>
+</kw>
+<kw name="Load Json From File" owner="JSONLibrary">
+<msg time="2026-04-28T15:22:07.331424" level="INFO">${payload} = {'id': 55, 'category': {'id': 55, 'name': 'Updated'}, 'name': 'Updated', 'photoUrls': ['string'], 'tags': [{'id': 55, 'name': 'updated'}], 'status': 'sold'}</msg>
+<var>${payload}</var>
+<arg>C:\\Users\\jdeve\\OneDrive\\Desktop\\Api_using_robot\\Petstore/../data/updated_pet.json</arg>
+<doc>Load JSON from file.</doc>
+<status status="PASS" start="2026-04-28T15:22:07.330215" elapsed="0.001273"/>
+</kw>
+<kw name="GET On Session" owner="RequestsLibrary">
+<msg time="2026-04-28T15:22:09.238934" level="INFO">GET Request : url=https://petstore.swagger.io/v2/pet/55 
+ path_url=/v2/pet/55 
+ headers={'User-Agent': 'python-requests/2.32.4', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive'} 
+ body=None 
+ </msg>
+<msg time="2026-04-28T15:22:09.239074" level="INFO">GET Response : url=https://petstore.swagger.io/v2/pet/55 
+ status=200, reason=OK 
+ headers={'Date': 'Tue, 28 Apr 2026 09:52:07 GMT', 'Content-Type': 'application/json', 'Transfer-Encoding': 'chunked', 'Connection': 'keep-alive', 'Access-Control-Allow-Origin': '*', 'Access-Control-Allow-Methods': 'GET, POST, DELETE, PUT', 'Access-Control-Allow-Headers': 'Content-Type, api_key, Authorization', 'Server': 'Jetty(9.2.9.v20150224)'} 
+ body={"id":55,"category":{"id":55,"name":"Updated"},"name":"Updated","photoUrls":["string"],"tags":[{"id":55,"name":"updated"}],"status":"sold"} 
+ </msg>
+<msg time="2026-04-28T15:22:09.239295" level="INFO">${response} = &lt;Response [200]&gt;</msg>
+<var>${response}</var>
+<arg>petapi</arg>
+<arg>/pet/${PET_ID}</arg>
+<doc>Sends a GET request on a previously created HTTP Session.</doc>
+<status status="PASS" start="2026-04-28T15:22:07.332119" elapsed="1.907213"/>
+</kw>
+<kw name="Should Be Equal As Integers" owner="BuiltIn">
+<msg time="2026-04-28T15:22:09.241049" level="INFO">Argument types are:
+&lt;class 'int'&gt;
+&lt;class 'str'&gt;</msg>
+<arg>${response.status_code}</arg>
+<arg>200</arg>
+<doc>Fails if objects are unequal after converting them to integers.</doc>
+<status status="PASS" start="2026-04-28T15:22:09.239973" elapsed="0.001179"/>
+</kw>
+<kw name="Set Variable" owner="BuiltIn">
+<msg time="2026-04-28T15:22:09.243091" level="INFO">${body} = {'id': 55, 'category': {'id': 55, 'name': 'Updated'}, 'name': 'Updated', 'photoUrls': ['string'], 'tags': [{'id': 55, 'name': 'updated'}], 'status': 'sold'}</msg>
+<var>${body}</var>
+<arg>${response.json()}</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<status status="PASS" start="2026-04-28T15:22:09.241755" elapsed="0.001383"/>
+</kw>
+<kw name="Should Be Equal As Integers" owner="BuiltIn">
+<msg time="2026-04-28T15:22:09.244403" level="INFO">Argument types are:
+&lt;class 'int'&gt;
+&lt;class 'str'&gt;</msg>
+<arg>${body}[id]</arg>
+<arg>55</arg>
+<doc>Fails if objects are unequal after converting them to integers.</doc>
+<status status="PASS" start="2026-04-28T15:22:09.243865" elapsed="0.000640"/>
+</kw>
+<kw name="Should Be Equal As Strings" owner="BuiltIn">
+<arg>${body}[name]</arg>
+<arg>Updated</arg>
+<doc>Fails if objects are unequal after converting them to strings.</doc>
+<status status="PASS" start="2026-04-28T15:22:09.245062" elapsed="0.000528"/>
+</kw>
+<kw name="Should Be Equal As Strings" owner="BuiltIn">
+<arg>${body}[status]</arg>
+<arg>sold</arg>
+<doc>Fails if objects are unequal after converting them to strings.</doc>
+<status status="PASS" start="2026-04-28T15:22:09.246029" elapsed="0.000461"/>
+</kw>
+<kw name="Log To Console" owner="BuiltIn">
+<arg>${body}</arg>
+<doc>Logs the given message to the console.</doc>
+<status status="PASS" start="2026-04-28T15:22:09.246888" elapsed="0.000497"/>
+</kw>
+<doc>Retrieve a pet by its ID</doc>
+<status status="PASS" start="2026-04-28T15:22:07.328548" elapsed="1.920114"/>
+</test>
+<test id="s1-t4" name="Upload an Image" line="61">
+<kw name="Create Session" owner="RequestsLibrary">
+<msg time="2026-04-28T15:22:09.252348" level="INFO">Creating Session using : alias=petapi, url=https://petstore.swagger.io/v2, headers={},                     cookies={}, auth=None, timeout=None, proxies=None, verify=True,                     debug=0 </msg>
+<arg>petapi</arg>
+<arg>${BASE_URL}</arg>
+<arg>verify=True</arg>
+<doc>Create Session: create a HTTP session to a server</doc>
+<status status="PASS" start="2026-04-28T15:22:09.251940" elapsed="0.000690"/>
+</kw>
+<kw name="Create Dictionary" owner="BuiltIn">
+<msg time="2026-04-28T15:22:09.255039" level="INFO">${form_data} = {'additionalMetadata': 'Sample image for pet'}</msg>
+<var>${form_data}</var>
+<arg>additionalMetadata=Sample image for pet</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<status status="PASS" start="2026-04-28T15:22:09.254118" elapsed="0.000985"/>
+</kw>
+<kw name="Set Variable" owner="BuiltIn">
+<msg time="2026-04-28T15:22:09.256496" level="INFO">${file_path} = C:\Users\jdeve\OneDrive\Desktop\Api_using_robot\Petstore/../data/ubantu_image.jpg</msg>
+<var>${file_path}</var>
+<arg>C:\\Users\\jdeve\\OneDrive\\Desktop\\Api_using_robot\\Petstore/../data/ubantu_image.jpg</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<status status="PASS" start="2026-04-28T15:22:09.255770" elapsed="0.000788"/>
+</kw>
+<kw name="Evaluate" owner="BuiltIn">
+<msg time="2026-04-28T15:22:09.259328" level="INFO">${file} = {'file': &lt;_io.BufferedReader name='C:\\Users\\jdeve\\OneDrive\\Desktop\\Api_using_robot\\Petstore/../data/ubantu_image.jpg'&gt;}</msg>
+<var>${file}</var>
+<arg>{'file': open($file_path, 'rb')}</arg>
+<doc>Evaluates the given expression in Python and returns the result.</doc>
+<status status="PASS" start="2026-04-28T15:22:09.257992" elapsed="0.001394"/>
+</kw>
+<kw name="POST On Session" owner="RequestsLibrary">
+<msg time="2026-04-28T15:22:11.491895" level="INFO">POST Request : url=https://petstore.swagger.io/v2/pet/55/uploadImage 
+ path_url=/v2/pet/55/uploadImage 
+ headers={'User-Agent': 'python-requests/2.32.4', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'Content-Length': '6465', 'Content-Type': 'multipart/form-data; boundary=8d647272b745567856a26922ff79d082'} 
+ body=b'--8d647272b745567856a26922ff79d082\r\nContent-Disposition: form-data; name="additionalMetadata"\r\n\r\nSample image for pet\r\n--8d647272b745567856a26922ff79d082\r\nContent-Disposition: form-data; name="file"; filename="ubantu_image.jpg"\r\n\r\nRIFF*\x18\x00\x00WEBPVP8 \x1e\x18\x00\x00Py\x00\x9d\x01*\n\x01\x94\x00&gt;i0\x94G$#"!(\xb5\x9a\xd0\x80\r\tc\x00\xc7\xa0\x8f\x18q\xfd\xcfl/F)\xd3?\xe8\xbb\n"el\x9e\xdcx\x0b\xbf&lt;\xc5y\x01\xf1\xa6&lt;\x07\x87o\xde\n\x02\x9bL\xce1\xb0\xfd\xb5\xa3\xe8\x14;\xdb\xb7t\xe5\xa5g\x87[\xab\xc018&lt;x\xc6\xf6*\x99G\xbaX\xa1\x8e\xb0z,O\x15\xdd\xbdq\xe4\x85\x7f\xc2\x03\xd6n\xeaH\xa8\xbe\x14gA\xa1\x07\x81?\x8bQ\xb2\x84\xcf\xd3Z%\xcc\xd8Dn}\tS\xa7\x15\xdb\xfe\xe6P`\x83\xcc\xf4\xb3\xdd]+\x05\xd7\x16\xc9\xc9\xa4\xa4\xdaC\x12\xa3\xae\x1e\xfc\xae\xda\xe5\x9a\xf4\xb2c\xd8;\xcdY\x7fN\xe0M`\xe7c"\xac\xd7\x17\xe4\xb6\xd2{&lt;\x1b\xc9\'\x8b\xc6\xfb\x1emg\xb9\x93\x97\x94?;h\xba\x88\x0fI.\xee\x85\x9bB\xc1W\x1d\x94X-\xa94\xaagI:\xe7\xb6\x8bw\xa4\x16\x1a\xe0\x98\n\x9c\xd2\']\x7f~\xc8\x9a\r@\xd5\\\x97\x95U\x05\xe1\xea$2\xceK\x92\xe5\x18\xb6\x9e\xd9+\x04\x1d\xfc\xcb\xf3&amp;\x89\xab\tb\xd9D.\xf46\x91\xe1!Q\xf3&gt;L\x06\xf7\x07\xdcq\x0ei]\xe1\xce\xe7\x1cA*\xa3e\x807\xec9\xe9,z\xe7\xa5.\xb2\xf8\x9a!,]3=8v=\x86R\x86"tlLu\xfa:S\xe8\\N\xe5\xd7eVzq\xab#LY\x89\xb5\xe0\xc2p\x16\xdfN\x80\xde{#&gt;\x9d\x97M\x9a\xd6\xf4.\xfe\xe8\n\x11\xffx\x16\xcc\x8bV\x1b\xa6\x16\xf4\xb5j\\\xbav\xb4B\x0b\n\x8a\xe4\x84"\xb8\x12\xf1g\x07\xc9\x15l9I\xbflXV\xb5a1\xe3\x84\xe5\xc8\xf1\xa6\xfe\xabg\xbeS\x14M\xc7\xd0#\xc4\xcf&gt;\x90\xec9\xdf\x83]4\xdf\x11\xaa\xc7\xef\xa2nZ\xfd\xcf#\xc9_\xf1\xf4\x18(\x185\x12ON\xd6\x9f\x1c\xf7h\x0f\xcfq\x0bfp\xc2\xe0 \x8d\x98\xd4\x1a\xb3Z\x18\x7fj\xbc\xa6~&amp;\x9fh\xca\xbb\x1bt\xb5\xed\x10\x84r\x15\xdf]7\x83\x82&lt;\xab\xd3`G\xc7"\xce\n\xf3\xcb\xd9\x1a\xcf\xe0n-\xf7;\xd6@(\xcaj\xd2(\xcf\xda\xea\xef\x8f\xe1\x00\x9f\xee\x0e\x86\x1f\xf8\xee\xd7\x8f\x99\xe8\xdb\xe9L\x14\xe7\xa7\xac-\x8c\xcf8\xbf\xad\xd0S\xbal\xb3F\xdd\xf0\x9c\xac\x14\xf2\x81\xb3\x8fI\xd8\\\tJ\x87\xbd\n\x9dd\xb2Q\xe8\x13\xdb*C\xf8l~\xefU\xd8\tXzOt\x90\xc4w\xce\xc8\x88\x90\x85\xec\x03F\x1e\x9a\xca\x06\xb7\x8a\xb1\x04\xcb\xe6\x8d\xa4\xe1\x87\xb8\xe3\x81\x00\xa9\xef\xaa[\x01\xcc\xc6\xdf\xbf\xb2\xe0\x05\xd8&gt;oN\x9f\xc6\xbaX\x95&gt;\xccd\xd1e\x17\x8d\xb3\xa6\x81\xcdCR\x03Hs\x9bKc\xb3\xd2MX\xb6\xcc\x0bv\xfa\xa9\x80\xd5\xb7\xe3\xc5\t\x00\xbeB\xa3\xdf\x03\xb5\xcdg\x97\xb0\x98\xa9\xc9\x92\xd3\xb2@5\x11\xa2`9&amp;\xf6+\xeb$\x90?P\xac\x8fi\xc6\xb9\xef\x9f\x98\xb5\xa4\xd2\xd7`\x16;\xc0e\xeci\xc6J\x9en\xd2\x05P?\x93~\xdeb\xd7\xa6\xbbJK\xf5D\xca"\x17\xcf\xa5\x18\xf1BC\x03\xe7\x8c\xda\x86\x83\xcb\xa4 \xe8\xc7{:\x90~\xb3\xac\x9a\xb99\xe3\xa40\xf2\xd6\xeb\xc2\x94\xa2\x87\t\x02I\xd1\xa4:`\x8b\xae\x89\x80\xadF\x05\x08\x1bmn\xb61\xf0/\xc2\xe9\x1d\xfe\xafe:\x84\xeb\xa3\x19q\xbd\xe9O\x00l)\\\xbd2@\x16\x9d7\xac1*ItQ\xb2\x8b~\x86u\x14:\xb2\xf4\x85\x92p\x9cQ:\x13\xac\xbf\xaa\x11\xea\xbb\x8bIwT_\xc8\x9b?\'^\x103\xcd\xcc\x16\x90\xcc\xd0\n\xde\xa2\x98\xfa\x9e\x91\x1b\x84\x12\xc2Ru\x95\x08&amp;\xd6m\\X\xcf\xaf|\x88\xf7Se\x89^4@\x83\xe6\xfb\xbd\x17\xdcI/\xb0\x14\x9a\x9b\xd3^\xa4\x88\xc9;J\x07\x12\xa6R\x84\x88\xb8%2u\x83B\xf7\xf0\x86Bx\x9fv\n\x17\xd9\xfaz3(\x19\x06\x1d\xa5\x0bm\x00\x00\xfe\xdb\xc1\xdf\xfe\x95\xa8y\xc4\x90\xb2}\xe1\xaf\xff\xf4\\W\xfe!\xfe\xca\xde5\xfe\xa8\xba\xb1FF\xdc/\x9b\x9aBMc\x1c$$\xba\xf6\xbcK\xe2\xceR\x9a\xa1\xbe\x89\xc5{\x03\x8b\xa9\xf4\xb7\xdf=U\x8a\xde\x08:&lt;\xc3\xb7\t\xbcH&lt;Q\xafW\x8ct\x86\x0cbW\x94\x9e\xce\xf1D\xa8Z\xec\xcc\xab\xc5\xcc\x91\xfa\xfa\xc4|.\x912\xee\x10n@+8\xdc\x9c\xba\rg4\xc1\xb1\xce\xf8a\xff\xdd2\x13\xf2\x97\x1fA\xd8\x90\x83ev@8\x04.\xa2\xf8\xe0\x0e\xfaT\xf3\xd8\x8d\xa2Q\xffSr\xf3m\xbf.\xaf\x99\x86\x15\x0e\x8bZ\xb3|\x1b\xc0#U\xa4\xe0RArGs\r\xdc\x9cYf\xa7\x15++k\xffQ\xa2\x1bR\xf7\xa7\x18\x17OCD\r\r1\xfd\x10p&amp;("&lt;7\xc9\x1d5\xcb\x9a\tBE\xbb\xefY\xd3Ri\x91\xa0\x06\xb8\x8b\xd5\x1d\xcfp\xbe\xe1\xfc~Q\n\xec\x06\xd1\xfb\x93b\xabg\xads\xf3H\x84\x8e\xcani*\xe6\xcb"@ \xe09#\xc0\xf6n\x12g\xecU\xf1\xbf\xfd=\xaf\x9e\x17:\x07\xcc\x07b\x07\x81\x9d\x02Gk\xef\xc7\xaf\xe3\xe8\xd7\r\x98\xfcR\xcd\xd5\xaf)\xfb[g\x84f\xcd\xfc\xc9\xf4\x99\x1e\x8b-n\x0f\xa8&gt;\xae/\x1a\x8d\xdaYh\t\x99\x99\xf9\xc2\xfdk\xff0\xc5 \x04\xaeO\xa4X\xfdv\xaf*\xb1\t\xe8\xb8\xbc\xb2\xaf\x19U\xb2"\r\xbb\xb3u3\xd1\x8cB\x1248(\xe9\xe3\xa3\xad\x00\x8a\xc5\x1d\x87\x14\x96\xe2N9\x19\xde\xf3\xa8Q?a\xf1\xbd\xcb\xec\xc5\xb8)\xe2\x80\x82Q\x90m\x02Qx\xc5\x80\xe90\x01\x82e\xc9\xc6!\x89\xf8\x19\x81\xdc\xb8\xfe\xe0\xfe\x8c\xe6#\xd4\xdb\xad\x96\x08\xf1\xe9*\x92\xd5%|]H\t\xb6`az\x18\xcc\x90\x9afs\x1c\x92\xc73\x8a\xe0\xadg\xbdW\xcd\xdc\x15\x05\xb2S\xde\x12\xf4@ \xca\x11\x1a\x89\xb7m:kd\xabtul\xe4t\xf4\x95\xc2\xaa\x1c\xaf9\xf9s\x0e\xb6\x1f\xbf\xe0\xcd]\xce\xcdB\xf45\x9a\x07_\xf1\xf7OM\xc52\xc9\x89\xb0&amp;\x95\xd2\x07\xde,\x7f\x1bYax\xdet\xdf0J\x94Y#,\x81A?P\xa2\xc2\xcaES\x0c\x12\x01\x8e\x1bWT\xf4\xed\xa0\xfa\x18\x84\xc5\xe5?\x1f\x00E\xe7 =\xfa\xfa\xe0\t\x92\xf6_P\xae\x04\xaa\xd8\xe7f\xd83\xda\x95\xfe\xfd-\x99\x9b\xb1\x04\xe1~\xf7\x93\xf9\xa4DolkJ\x1aHE\xccwCJ\xc1\x9d\xfb\xbb\xfa\xa9s\xb4E\xa7P\x1cK\xf3Y\n\x80s\xc7L\xc6\x91\x11\xff\xca\x90\xb7\xb1\xcdzi\x8e0]\x1e\xb0\xca\r\xbf\x863\x88tAX\xc5\xe2\x87C\xdd\x18M\xd2RQt-{\x10&lt;bbdK:&lt;t\xa3\xe1+\xb7\xd3\xdf\xfe\xd7\xe9\x88\xc6\x05\xbf\xb8\xb9\xc9FR-\x14\xa7\xd8\x10\xc4\xb1h\xbd\x9d\x88$R\x01\xfd\x96\xeav\xe3\x84\xe0#+v2\xbao\x1e\t\\\xe8\x00\x16D\xa0\xb8\xf0\x9b\x1c3\x81\x1c\xb7\xbf\x11\xd4\x17\xa8@\x07DW\x96`\xa7F\xa2\x10\xb7\xd1"\xb4\x17\xe8\xe8R\x13\xd4\xc1\xe0\x18\x89/\x8eMRF\x06\xd8\x91&amp;\xb0\xf0\x92\xee\x00F\xd1x\tu\x18\xf3\x13\x82n\xa7T\xef\x84\x8d7\xa1\x80\x11O\x9f\xbc\xd4\x13\xec\xed\xd5\x0e\xd4\xb2\x06"\x8cm\x94.Y \xd8\x99\xd8\xf8\x9a\x9cA\xb6\xd4 ~!\x93w#\x91\xa3"l5\xf3_P\xfbI\xcaj\xf6\xfc{\xdd"\xc2@\xa6\x92\\~L\xd5Ad\x1d\xe8\xf4\xc2\xff\x04`q\x8b\xe5\x02M\xc2q4\x18\xcfb5\x9b\x08\xacW\x1c\xa7}\x1a\x9e)R\x08\x13H\xa0\\\xed\xfa\x85K\xd2\xf1\xbeu{\x00\x149\x90\xd64h\x99\x03\xf8\xc5\x1fSgq\xa5\xc9\xa1@\x82\x9a \xe9\x89\xce\x0b\xcf\x17?\x7f\x89^\xbaoc\xd0\x14\x92\xa3\xea\xdc$\xdb\x00\x84\xd7N\x0f\xe2\x97\xa4jC\xab&gt;9jrz\x03\x1d\xcb\xaf?\xbf:\xe7,\xad\xaa\xf9\x0b*\xeb\xd8\xf6|\xff\xbf\x0c\xf1\x9dzE\x85|=Q^\xa1\xffx\x8a\x95m\x81P\x1bJ\x97Ig\x9b\xee\x876\x19\xf2U\xd6\xfd\xda\xde\xcb\xdc^\\\xf7/\x10\xb9\xf8\xd4\xbf\xbd\xad\x7f\x8a\xd5\x1e\xa3v\xbd\x10\xe7\xa3\x11\x9c\xef\xc2\x04:\x85\x8a\x9c\xcb\xf7A\xc0Q\xd1\xadTA3?\xc8\xc9C3\xf6\xdc7Q+\xb4nh\t\x1dNZ(\xb8\x0bH:\x1f\xbc\xb4o\xf6L5#\x02\xc7\xa1v\xc6\xf5\x8e\x8d\x1d%\x85\xfcV\xd0\x05\x04\x8f&amp;r_\xdeJ\xb0\x8a\x04\x9bT"\x87E&gt;}\xbb\x08Z&amp;o\xe0]\x08k\xac\'\xd2SVm\xd9\xde\x0bh5\x95&amp;\xe7\xffG\xff\x04W&gt;\x8f\xcd&gt;#\x02u\\\x89G\x1c`\xde&gt;}8\xe6\xe1\x96t\xbc\x1c\xdaA\x19\x13G\xff(\xd6\x9d\xd1j\xa2\xdaUJ\xda\xfaa\x06\xc0\x8e\xafr\x85\x16\xd71\xc7\x82\xe0l\xa4\x8c1%J@q\x89\xdb\xfe\x1d\xca\x95LU\x0b"\x92\x17\x8f\x96\xcd\x08b\xf8\x02\xd7\xe4V\x10\xa2&lt;NY\xedG\xab6A\xc2\xba\xba\xc0).C\xc7\xe2\xf2\x1d\x93\xa7\x9f\xc7Ya\x16\xb8\xf4\x9f\x18\xe9\xfa\xc8\xa0Qxa*\x1b\xf6\xed\x0c\xa4Hu\x86Q\xe0CK\r\xe53\xe0\x10\xab4\x1a\x9b\xcdrDE)\x1b\xd29\x03\x1c\xdb\xd5\x00\x10\x03\x14\x9fn\x1cW\xc7\xe70\xa9\xf3&gt;\xec\xbdk\xe0\x8a\xb4\xbf|\xba\x1c\xf9\xcf\x86\x1e\xdd\xa3"l\x81\xef.?\xd3\x1a\x06T\xef\xff\xf4\xd8\x9e\x85\x1e\xdbW{\xa0\x9e\xa1\xfc\xf6\x8f\x0e!\xc6\x9e\xa2Lg\x12\xb3g\xd5\x8f\x97\xc7\x14tV\x06W\x0f\xfd\x16(\xeb\x98\xfa\x9e\xde`\x01\x9a\x95i|) \xe7\x7f\xab\xb1\xad\xd9\xfa+`\x92"(\x83\xe7G\x06\x8c\x18\xfc\xcal*X\xf8"d\x94\x0e\x9e\xc5\x1e\xfe\xa7\xc5\x9d\x16.\xa2K3\x99\x91\x05\x05\xba\xbe\xc0c\x17\xcf\xe0hj\x83\x97B?dgi\x1a\xa0\x9c\xb3\x04\x10w{\xdfr\x96d\xfdz|kq\x10x\xa5P\x13@\xb5\xc8\xcc\xa4@\xfb\x00Z=\x16uI\xe9\xc4\x93*L\x7f\x11&lt;\x93\x16\xfb\xa7\xdb$\x1fC\xf2\xb9\xbf:\x1c\x04\x8c9\xa3{\xec\xde\xe4\x8e\xd7\xfaI\xf7\xed\xc8\\\xce\xbd\x86A&lt;|\x7f\x8c\xb7\xd3\x98\xd3c4;R\x98\xd4\xe1\xe1W\x94\xf79\x1a\xfaP\xa0u\xb6\xb1r\xdd%\xd0I\r\xfa\xd5\xb6\x96\x03\xb3\xa3\xee\xd8\xf5\xe6\xf7\xb4\x9aLN\xd8\xf4:\x9e)m!N\xd9\xa6\xfe|{\xdd\x13\xb9e\x9dH\x08\x8a\xa4zvZ\x88f1\x16\xce\xcd\xac[\xe3M\xb42\x8a\xd3\xc2\xe1\xd6S\xde`z\x1ei\xdd\xf9\xc7~*&amp;\xb0_V\xd1Z4\xb0~\xc6\xed\xde\xd2&amp;KC\x08?\x1f\xd8\'\x15\x8de\x1f\x96\xb3\x81\x92\xd9\xc7y\xff\xa9"\xcc\xd2\x84\x19;\x02z\r2\xf5\x9d\xea5\xbfV\xb25"\xa8%\xef\xdb\x99w\xbf\x88\xbb`6a^\xab\xa9m&lt;\x91\x92\xd3T\xf7T\xde\x90u\xab\xabJZ1\xa8\xe4\xc6\\\x834\x8b\xee\x88\x19 \xa0]\xb0\xd8\x15\x95\x05\xe61\xb9\\\xe7\xe7\xc3\xfc\x97U\x93\x04\xf8\xa79\xa92\xb5\xd6\x84\x13\xf1\x02\xb1\xfa\xf6\xa0\xc2\xb4):\xc8\xbe\xcez\xf6oj\xc3\xab\xad\x94\x0c\x19\xf8\xe0\r\xa0\x97dr\xf6\xd1\x8e\xe6\xebJX\xf5\xb9d@\x98\xfa^K0\xbf\xcf\xe98\x80\xa5\xdc\xfb\'\x03\x19,X\x92VS\x8d\xfaR\xf7\xe4)0u\x95\xcf\xb3L^\x8b\x14"\x92\'+Le\xba\x92\x06Sh\xe3Y5.,\x02\\\xca\x0c\xa6_m\xc2\x9f\x90\x8b&amp;ju\x18\xe9j\xe7wg9i\xcc\xf9?\x93S\x1f\xd0&lt;m\xe1.O\xe4\x90=,\xeeh&lt;`\x1e\xeb\xa7U\x83\xf4\x97+\x0eU-k\xf9\xe05\xc3|\x13\xc2M\xd1\xe8\xebi\xef}.QB\x99a\x06\xa4c\xb3\x9a\xa4\x7f\x17.7}E\xb3\xd0w\xba\x94Q\xfe\x9co\x8d@\x07LY\xed%\xc8\xc4\n\x93\x04\xf9#\xdc\xbc\xfbV_d\x19\xb7F`\xb2\xb2@1\xedY\x826\x0fuv\xbch\xdc~\xc8\x89%\xb7\x9f\x99\xa2f\n\xe6\x1f\x91. JCQ\x1b\xbdR\xd9GDtI\xc8-\x17%\xd9\xf2\x05\xff\xa2\x8axSy\xd7\x91\x8a\xa5\xeb%!\\\xe25&amp;\x91\x04\xd0\xc2\xf9\x91\xeb\xd3\xb9`\x12k\xb4\xb4\x00\x0b\xedg\x89\x10\xb2^.T;n\x80y\x8a\xca\xa4\xbd\x92)\xd7Is\x88?\xf4\xbc\xae\x01\x02\x06\x91oS\x15_+@\xce\x92E\xd2\xd7\xf4\x0c\xb4c2\xdau:\xe7\n\xd1\x90L$\xfd\xdd\xa5\xee\xbc:#bP\xa5\xcd0\xce\x13\xa6\xea\xf9\xbb\x04\x88\x7f\xa0\xe9\x06\xf9\x84;T\xda\xa1\\\x86\xef\xc9\xe3`\xae\xdc\xf6\xc8\x89&lt;\xae\xc4\xbdo\xd6\xcb\xf4_\xab\x0fKE\xf2\xf5\xd7c;\xf0\x80:\x86\t\x93\xc4c\xf9$\xde\x15\x14I\x8b&lt;1\x0b$\xb3\xe0\xf2\xd2\xff\x9dW\xea\xf4\xcf\xb3\x00\xb4y)g\x04,\xb3\xc9\xec\xec\x0fo\xff\x1e\xb5\xc5b\x83;K\xf8C\xa7K\xa2\xa7?ph\xbf8\xado5\x9eBJ\xe8\x12\xbc\x9a\x87\xc4\x92\xc4\x10\xc3\xae\xbf\'\x08\x8a(\xf2\xd0\x00\xc3\xab\xc2f&lt;\xec7\x17\xa8\xa1Z\xb4B\x9c9\t\x973d&amp;\xa0\x81H\t{\x93\xf9(z\xfd4\t\xb78\x1d\xbe\xae\xcb@a\xce\x08h\x9b\xcb^1\x826\x8e\xf3\x0e\xe9Y\xa4s\xc6h\x92\xe6\xb8\xae\x85:S\x11sJ\xf0r\xf3\xd0Bf\x85\x0f\xd3\xa9\xcc\x99\x9b\xb0o\x08t\x88\xf8\xdd\xf3\xe7\xc6\xe3\x8d^\xfb\xe1\xb4\x15\xde\x9f\x9eK^\xbb\xc4\x9f\xbd\x11Oc7dI3\xdbGk\xa4\xac\x19\xf7^\x8fv/Ju\xf5L\x91z\xab\x19\x0fx\xed\xa7\x92\xd1\xfd\xbf\xfdm0\xdd)\xd6;\xbe\xd7\xe2\xd4\xd0X\xf2k\xe7\x1a\xdc\x0c\xe1\x12\xd8\x92S\x1f\xa9T\xb98|\xc5\'\x06s\x9a\x8b7\x85\xdar\x1em\xd0\xb8\x05\xaa#\x86\x89/\xbfw\xab\r\xe9[\xd3\xf9\xda\x82\xb1U$1\x101\xb8@\x85\x983\x98\x0e\x15r\xf2\x90\xc5\xbb\xda\x17\x91)\x02\x9e\x9a\x05\x0f\x1b\xbd\xbe\xc7Fp0\xaa2\x1c\xaf\xcd\xb87\xd3\x14\xacfM\xf7\xc6q6\xe6\x0e\xec\xef\r\n\x93n9 \xfe|M\xb4f\xfb\x8f\x8a\x90-D\x80\x98\xc2\xd5\xba\xff\xa1\x16o\xd3\x18\xe9]\x9d^{m\xb54J\x92\x0f\x19a\x01\x0f\xfc\x0e \'\xcb\xe4\xd4\xcd\t\x16\xcd4j\xd82\x18s\xc5\xdc\xe9E\x1f\xd5\x93\xda\x85\x81\x0b\xe65e\xa9\xc6D\x08\xe8D\xca\xd6|\x9f_F?\x9bU\x93\xff\xf0\xefZ\x89\xa6\xbf\x1c\x96\x87\xa5PU\x0f\xa3\x16X[+\xed\xe2S\xaar\xd2jn\x03\x13b|lw/\xc1\xd6sh\xefsF\xaf\xcb\xf0J\xa6@\xa7\x84\xd2:9\x98\xdcDC\xe1\x11\x0b\xab\xaaR\x05\xea\xdd\xdc\x06"(7!\xbf\x8f\xa45\x13R\x94\xa4\x03onY\x82y\xcb\xc9\xe2{\xf8\xbd\x11\xf6\xb1)\'\xfcD\x1c\x9bv\x1c\xb5\x87\xc4\xab&gt;\xf0p\x0f\xde&amp;\xd2vG(\xdb\x89\xec(zmc\x19\x9a)\xc7\xf2\xe8"\xc0\x98\x0e.\t%\x10\xbfZN\xf8\x9d.b:\xe1U\x98\xbd\'\x1dr\xab_ 1\x0bv\xbc\x01\x194\x9dT\xe5S;;\xca\xa0\xd03\xd0\xaf\r\xb6\xe0\xe6J\x15 \x1f\x98\xcam=$\xc5\xd8\xce\xcac[\xa5S+\xdf\xa8&gt;\x97\'V\xd5\xf0\xe4\x1d\xce\xc3jSY\x07;\x94\xe5\xfe\x00W\xe2\xcb\x13\x81\xff Vo\xfc]`\xf9I=\xcd&lt;h"\xa8\xed\xf4 \xb7,(\x08\xfb\x9a\x8b\x93\xc9\xad-\xa9\xeezF\xe7G.\xffDDY:}\x8f_\x01\xd5\xdc\x91\xa0\x13\xdf\xe6\xf2\xc1\x8b\x17\xa2\xde\xdb\xce\xa9\xd2\x93\xbd\x9c\xc1\xf54\xa2\xbd\x85\x16\x9bt\xcbU\xc8\x8c\xb0w\x19\xe0\xb9\x87\xaa\x84\xfc\x8b\xf8\x82\xa4\xfa\xb6\x91\x00{3`\xef\xa5\x91\xde\xf8\x9cB\x83\x15 \x8d#\xb8\xd5\x9a6\xbfF\xd48WY\x1e\x8b\xf1\x9a\xb0Q:\xe7*2\x89o\xca\x04\xc6\x8d\x06\xac\xab+\x9b\xe1)b\xb2\xd1H35\xed\xb0\xd8\x15\xf5cNhe:\xd1w\xab\xc4P\x90x\r\x88\x0bR\xcc\xf0\xf4\xb3H-V\xe6\xd5\xc5rh\xb2\x98\x8b-\xe9\xee-\xd7}0/JG\x97X\xbc\x03\xf29q\n\x05\t\x1fO\x13\xcfE\xe7\x18\x13\x82k\xc4,a\x1a\xea\\\xc3MAa4B|W9v\x8b\x7f\xb7{&gt;x\x8d\t\x99H\xbb\xd7\xbe\xe7\xf8\x15\xb8\x8d\xa7xs\xba\x88B:\xb8\xef\xe0[\xc6xW\xf4\x0bA\x1f\n6\xae\x1d\xb7.k\xb8\xf8\xd9\x8eC\xf8\xa4(hz\xa2\xd0v\xbf]\xe7\xd8\xfa\x7f\xc9\xb4\x9e\xec;4\x1c\x8fT\x80P\xd2&amp;%\xee\xd3K\x19 [m%19W\x8dn\x9fVb\xef\xa1\x92\xc5\xfe#\x198\xcb\xde\xb3\x9e\x93\xa84Z\xbf\xccn1K\x0c7O\xbd\x96\xcc\xce\xea|\xdc\xd9\xeeHeT`\xb8\xef\xe9\xe9\x86+\xf9.\xdc\xca\x94j\x9f\xc2#\x7f\xedA\x7f6\x99\xfc\xa7\x1f\xd2\xaeN\xf9y\x15&lt;d\xbf\x91\x93L\x0e\xeb\x1d\r\xae\xcbn\xdc\xa8\xde\xe3W\x80\x05\xa6\x8e\xdc\xe6\x9d\xf7D\x02\x95\xfe\xe1\x9f\xfc;\xaf=\xd2\xd8\xd25\x04\xed\xa3\xb2\x88S\xe6\xde\xad\xa6\x9bb\xa5\x18w\x98\x03WI\x06\x8d\x1b\x97\xfc\x1f\xd6h\xee\x134\xf2m_D\\\xdeC&amp;\xad\x19\xe0\x8f\x98\xd6\xd6a\xd0p\xe3\xb5M\x80\xa4\xf7\xd6\x8e\xcf\x818\x96\xbdN\xab\xb7\xe1g\x94\x1b\x99@\xf7\r\xbfQL\xc4\xa3o\xeb\xb4&gt;y\xfefW2\xea\x95/\xc5\x1e\xb9O\xc7t\xe4s=\xa3\xda(\xc4/\xc7\x98f\x08B&amp;{/\xf7r\xb6\x92\xd9w\x97{\x16\xa0P\xdf\xeelU\x8f\xea\xf3\x93\x08D\xa5\xb7t\xab\xa1\xb7\xfc\x1f^\xde\x13\xb7\xd2~\x07Y\xe7\xfb\x94\xe7\x89\xc7\xa1\xbb\'\x12T\xae\x07+\xd6xq\xf2\xfd\x02!\x0e\x95l\t\x06\xa2v\x9e)\x06_=`\xbc]\xf9\xb9\x1c|\xb6\x1b\x93\x03\xfa8R\xfd\xbeg\\\xe5\xd1\xcf\x13\xf0Un\xc1\xfe$\x80#c~\rV\xe3\x1b\x7ft\xee:\xfc\xa8\xdd\xda\x9dB\xc3\x88\xd7\xdb-\xf9e%\xd9j\x8bd\x92t\xde1\xefC\x01\x8b\xa7\xca\x02jS\xc20\xae +b\x1f\xc2\x9d*3=*x\xf0t3\xa3\x86G\xf49\xee\xc5\xf0\x92G\x90\x1a\x12vp\xa4\x86*\xad\x1e\xa0\x0e\xdf\xa5\x89\x88\xe2\xb9\xd9K\xacb5G\xfe\xec\xd9\xf9\n&lt;g\xfc\x94\x93\xab\r(\x919DU\xdfzQ"\x0c\xa7&amp;\x15\xac\xf8\x94\xb1\xf7@\xd6\xec\x88!?\xa2,\xb1\xa9\x0cu\xe6S\x91)R\xaem\xa9\x0b\x08q\xc7\xf3e5\x96\xea\x0b\xbfGc\x9f\xcbM\xf3\xda \xed\xc9(\xc8\xf6uT\xf1\xd0$\xfc\xa6\r\xe4!z\xb4\x06\xe1\xb4\'\x19\xa5\xf4`\x1a\xbb\xef\xf6"\xa9\xe4\x04K\xa7\x99i\xa6\xe1"C|Fj\x14,a\x91\x1f\xfe\xc8\xed\x0b8*Z\xf9\xe1\xc1\xd2\xebG\xaf`\xb7&gt;!%\x9e\xf05\xc9&gt;\x94o"\xbe\x0b\xfdmd\xee\xb3\xc56\xbbs\\\xbe\x9b\xd3\x9f\xc0Gf\x87\x96\x9c\n\xd8\x0f\x84\xa7j\x90\xe205|#eT\xd5\x04\xc1\x1e\x08"\xfd\xca\x188\xec\xe8\x1f\xb6\xa57{\x81\xe2B\x92c\xae\xe52\xb0\x17\x16\xd0_\x9a\xa6\xf2\xc6\x95"S\xff\x05\xe9\x18\xdd\xa7M\xc9"\xe82\x15*\xf9\xf9\x9d$8\xb2\xc8E\x89\x00\xbf\xf45\xb1\xcb\xd1\xbc8\x9c\x1d\xdbHA%\xce{hw\xb52\xadLe\xe0 \xe4\x85\x16\xe3\x80\xa5\x96\xa2\x00\xa3D\x92*\x9a\x08~\xaf\xb2\x01\xd9N\xd8\x039\xe7\xb7Z\xaf\xb4I\x10`\xef,5\xc8@WX\xca\x85Q\x18\x17\x7f\x0e\xe2!\x9cz6\xd8VZ\xb8\x92\xa8\xed\xe6q\xf2N\xb0VS\x80\xc7\xcd\xe6\xaa\xe7\x89P\x0c\x8d\xfc\xa7\x85\x13^\xd9\x97\x86\xcf\x9f\xb3\xf4\x84\xfaE;g\xdf\xf4\xb5\xbf\x85\xa4\xe8\xc0\x94#\x91\x10\xb9\xf4\xee\xd9\x80_ly\xe8:\x1a\xfd\x1b\x14@4\x16\x81\xf67:\xef"\x9a2\x93\xad\xb9\xe2\x00\xcd\x18\xe6Y\x87\x01\x03\xaa5\x8d\xa23\xbe\xa26]&lt;]\x05%\x82\xcaw\x82k8\xc0,\x7f1D\x06\xba\xa4D\xceF=\xca:L\xfe`\xd2\x8a\x88\x1b\xd8\x02Gnv/Lu\xbf\x0f\n\n\xd0F$XYi*\x1bS\xe2\xce\x97\x96\xbb\xcf\xd1y^%m\xcf\xbe\x02\x1cE\x87G6\xe1~\xf9\xfbc\xef\xf6\xff\xbe\xb7\xa6\x1b\xfcon\xff\\\x15]\xd4\'t\x14$Z\x93\xaa\x92\xf3\xa3k\xe6\x16:BF8\x9b?(\xb7\x92\'\xfaz3f\x05\xe1RF\x0c\xd0Z7J%\xcc\x82=)\x8d\xe0\x10S\x18dB\xd1]}I\x02\xc5\x02\xf1W\xa8\xd2A\xf7n\x8f\xe8!%\xcd:\x1f\x97d\xf1\xa8^m\x85\x12\xb7l\xad\xf4e\xb4` \xa6(\x01\xc4\x8a\x1dLG\xd9zB\xdd\x1fc\xd0~\x887\x05\x11Z\x18\xeb&gt;\x88\xe2D\x1cv\x1f\x04MT\xc6\xf3\xb2qL\xd6\x90E6\xe6\x90\xda\x92\xd6c:\x0e\xa3\xedf6&amp;A\x9f\xcc\x9f5\x9c-@\xfe\x851 +\xbd\xa6J\x16\xc5\xe7$\x07:[\xee\x19\xfa\x0e\x92\x128\x86\xa8;\x8c\xef\x12%\x94p\xb6\x9d\xef\xa5\xf9;\xc9\xd9g\xe1\xac\xf0\xf5\x87\xb6\r\xc1\x02\x98\x07\xe8|\xc2 \xc7\xdc\xaa\xf8I\x9c2\xb0uV\x12\xd2\xa2\xbb\xec\xb9\xbd8WN\x8aO\xde\x82\x11\xfd\x93\xe4\x97wz\xc4\x07x\xd9\xbb\x90\x9b\x00nJ\xb0\x99Q\x19\x0b\xc3\xac\xb9oe\r\x9c7P\xa5]\xf3\xbe\n\x12\xb6J\xc2H\x084=5H\xfe\x9c\xd9\x86\xfcf\xb6\x04R\x88\x96e\xb2\xbc4\x9c\x07\x0c\xc1n\x9b\x1a\x1a\xa7\x89\xb6\xa9a\xb7\\\xf1@\xc2\xc9j\xb3\xf5\xb8\xbfM+\xb3\xc6{\xe0\x1cB\xee\x92\xfaQ\xc5k\xdb\x08&gt;\x1d\x8c?\xe2\x0f+C\x81)\x0fUu\x10:\xdf\xb2e\xe3{\xee@{kb\xd7\xb6\xc6\xa5\xee\xcf\xdd\xb04\xecO\xf2\xbb\xe2\xf0\xff\xadi\x873\xd7}\x85\xc0}\x1eT\xf3`\x082:\xd1\xdd\x92`\x8a\xaa\xde\x89\x91\xfeV\xc2\x0c2\xc9/\x04\x9b]\x81\x03\x99 \x9bF\xf0\x11\xf6u{\xfb\x1f\x8b\xbb\xa4\xe1\xbe\xb4){d\xbb\xb5\xe6L]\xc1=\xd4\xa9\x866\xfd\xce\x8a\xa4\x0f\xf0$\x8e\xa3Z]\x94y\xf5\x16\xad\xc9\x9b\xb93\xe8\xf6&amp;\xb4U`\xad\xb0\x06\xff\x1d.\x0c\x00\xcfK\x19\xf3\x84^\xb4\xbf\xb6\x8c\x91\x14\xbe\xc9\x13\xdd"\x02\x93B\\\x8513\xa6\x9f\xff\x9c=\x0e\xed\x8d\xd5\xc7RK\x08\xfa\x9c&gt;\x8a\x0c\x82f\xa5\xd4\x19\xfd\x9aG:\xa1\x1b\x9a$\xa1\xfe\x97JT%ft\xd0G\xf1\x80\x18\x90s\x07y1fEw[\xe8q\xf1\xba\xba\x11\x87\xca\xef\x81\x9a\xc1\xfb\xfc\xe6\xc4\x9f\x96\x96\xadK\xa7\x82\x8c\xb5D\xc8\xf4\x8a[E\xfdA\xaa\'\x86z\xa7\xf5\x8a\xfbm,\xb2\x88\x95\x0c\x0b\xe3\xa7\xc39D\x88v\x96Q\xf2\x1081\xea\x8f\x07\\\xdc\x04r8\x10\x85y\xa8\x1f\xe5\x98j\xb0\xa8\xf9\xc5\xcbi\x11/\xc5\x03B/B\xaeJ1A\x06~\xdc\xb18\x17\xac%\xa3\xce\x9c\x0b\xad\xce\xda\x93m)\xb3\x999\x805\x9eZ\xfc\x8bQ\xc1% D6\xb8\x0cwd\xc3|\tU\xe4\xfc\xf1\x88{\x81&lt;\xd9\x8f\x853H)F\xcf\xea\xeeN\x0f\xad\x86\xb9\x05\xa013\x9a\xd3\x90x\xbd\x8d\x1c\xc4\xc7\xb5~\x93\xbc\xa9\x8bg\xc8\xe6\x00\x18\x8b.9\xf9\xa9\x99\xfa\xc5_\x86{\xc3r\x8d\x19\xda\xb6\xeah\x8d\x92\x01\xc5\x02R\xa8xi3\xbb\x9c\xd6h[\xe45\xd8\xa0\x8aR\xde\x14\xd2\xf0\x97\x94\x84\xac1\x80yw\xf6pj\x8eWs@\x01Z\xa6\xcb{H\xb2\xff\xfa\xb5\x92\xd0e\xe2r\xc6\x8c\xf8\x00\x83,1wN[\xd5\xcc\x95$\xfa\x88\x0f-]\x05&gt;hq\xc5\xb1&lt;g\xf3\xad\xb0W^\xb6\r\xd4\xcb)\x8a\x83\x89\x1a\xd2\xe3\xd1L\xb0\xa5\xec8B\xc5\xe7\x01(\x9d~\xf2VA\xbb\xc9\xa9\\\x95R\xbf\x1f\xc4\xbe$yO\x80\xdfe\xc7\xf2\xbd\x1d\x1d\x00$\x9d\x8f\x01\x9eQn\xd2[\x03\x1eW\xa5\n\x80\\\x15-\xa6\x06\xd7z7\x91\xc5M\x17p.\xfa\x7f?h\x0e\xe2\x1bf\xf5\xe7\x93\xd8\x86\'\x81.GG\xeda\xa9U}y\xc9\xf6\xfb\xe9yz\x89\x85&amp;P\xee\x8dRP.\x01]!Q\xab\x86T3\xd8H\x19\x8bI\x90F3\xf0\x1f\x0f\x98\xaaIe\xfa\xf1\xb6\xcbp\x04B\x04\xe3\xec\xf1\x852\xaa&lt;\xc2\x02\x1b\x05\x81\x8a\xe10\xa0\xa9\x14)\xec\xb6\x05Z\xbdT\xee\x1c\xf1A\xf2-_\xafC\x9f\xbdo\x8b\xd2\xd8\x9c\xe7v\t\xff\xcf\xc3o$\xa7\x9b\x11\xf0\xba\x9c3s\xc4\x12\x82\x9c~\xd7\xec9\xb8$\xdf\x86`PFp?\xa1\xf7I\xd4R\xba\x82\xab\x98&amp;\xc1q\xf8p\xddk\xced\x03\xa5&lt;\xbe\xb6g\x93Xn2\xb2\xab\xe0\xc4*\x05@+R%O}W\xa8\xc6em\xd8\xa1\x0f:\x10+&amp;\x92\x05\xbb\xfd\xb5N\xa7\xd9\xbf$yX\xe7\xd81\xe6\xda\x00\xb8b\xc7\x80\x00\r\n--8d647272b745567856a26922ff79d082--\r\n' 
+ </msg>
+<msg time="2026-04-28T15:22:11.492530" level="INFO">POST Response : url=https://petstore.swagger.io/v2/pet/55/uploadImage 
+ status=200, reason=OK 
+ headers={'Date': 'Tue, 28 Apr 2026 09:52:10 GMT', 'Content-Type': 'application/json', 'Transfer-Encoding': 'chunked', 'Connection': 'keep-alive', 'Access-Control-Allow-Origin': '*', 'Access-Control-Allow-Methods': 'GET, POST, DELETE, PUT', 'Access-Control-Allow-Headers': 'Content-Type, api_key, Authorization', 'Server': 'Jetty(9.2.9.v20150224)'} 
+ body={"code":200,"type":"unknown","message":"additionalMetadata: Sample image for pet\nFile uploaded to ./ubantu_image.jpg, 6194 bytes"} 
+ </msg>
+<msg time="2026-04-28T15:22:11.492893" level="INFO">${response} = &lt;Response [200]&gt;</msg>
+<var>${response}</var>
+<arg>petapi</arg>
+<arg>/pet/55/uploadImage</arg>
+<arg>data=${form_data}</arg>
+<arg>files=${file}</arg>
+<doc>Sends a POST request on a previously created HTTP Session.</doc>
+<status status="PASS" start="2026-04-28T15:22:09.259977" elapsed="2.232954"/>
+</kw>
+<kw name="Should Be Equal As Integers" owner="BuiltIn">
+<msg time="2026-04-28T15:22:11.494617" level="INFO">Argument types are:
+&lt;class 'int'&gt;
+&lt;class 'str'&gt;</msg>
+<arg>${response.status_code}</arg>
+<arg>200</arg>
+<doc>Fails if objects are unequal after converting them to integers.</doc>
+<status status="PASS" start="2026-04-28T15:22:11.493717" elapsed="0.000984"/>
+</kw>
+<doc>Upload an image for a pet</doc>
+<status status="PASS" start="2026-04-28T15:22:09.251279" elapsed="2.243967"/>
+</test>
+<test id="s1-t5" name="Update Pet With Form Data" line="77">
+<kw name="Create Session" owner="RequestsLibrary">
+<msg time="2026-04-28T15:22:11.498059" level="INFO">Creating Session using : alias=petapi, url=https://petstore.swagger.io/v2, headers={},                     cookies={}, auth=None, timeout=None, proxies=None, verify=True,                     debug=0 </msg>
+<arg>petapi</arg>
+<arg>${BASE_URL}</arg>
+<arg>verify=True</arg>
+<doc>Create Session: create a HTTP session to a server</doc>
+<status status="PASS" start="2026-04-28T15:22:11.497676" elapsed="0.000622"/>
+</kw>
+<kw name="Create Dictionary" owner="BuiltIn">
+<msg time="2026-04-28T15:22:11.499522" level="INFO">&amp;{form_data} = { name=FormUpdatedPet | status=pending }</msg>
+<var>&amp;{form_data}</var>
+<arg>name=FormUpdatedPet</arg>
+<arg>status=pending</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<status status="PASS" start="2026-04-28T15:22:11.498936" elapsed="0.000625"/>
+</kw>
+<kw name="POST On Session" owner="RequestsLibrary">
+<msg time="2026-04-28T15:22:12.930894" level="INFO">POST Request : url=https://petstore.swagger.io/v2/pet/55 
+ path_url=/v2/pet/55 
+ headers={'User-Agent': 'python-requests/2.32.4', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'Content-Length': '34', 'Content-Type': 'application/x-www-form-urlencoded'} 
+ body=name=FormUpdatedPet&amp;status=pending 
+ </msg>
+<msg time="2026-04-28T15:22:12.931004" level="INFO">POST Response : url=https://petstore.swagger.io/v2/pet/55 
+ status=200, reason=OK 
+ headers={'Date': 'Tue, 28 Apr 2026 09:52:11 GMT', 'Content-Type': 'application/json', 'Transfer-Encoding': 'chunked', 'Connection': 'keep-alive', 'Access-Control-Allow-Origin': '*', 'Access-Control-Allow-Methods': 'GET, POST, DELETE, PUT', 'Access-Control-Allow-Headers': 'Content-Type, api_key, Authorization', 'Server': 'Jetty(9.2.9.v20150224)'} 
+ body={"code":200,"type":"unknown","message":"55"} 
+ </msg>
+<msg time="2026-04-28T15:22:12.931162" level="INFO">${response} = &lt;Response [200]&gt;</msg>
+<var>${response}</var>
+<arg>petapi</arg>
+<arg>/pet/${PET_ID}</arg>
+<arg>data=${form_data}</arg>
+<doc>Sends a POST request on a previously created HTTP Session.</doc>
+<status status="PASS" start="2026-04-28T15:22:11.500003" elapsed="1.431193"/>
+</kw>
+<kw name="Should Be Equal As Integers" owner="BuiltIn">
+<msg time="2026-04-28T15:22:12.932696" level="INFO">Argument types are:
+&lt;class 'int'&gt;
+&lt;class 'str'&gt;</msg>
+<arg>${response.status_code}</arg>
+<arg>200</arg>
+<doc>Fails if objects are unequal after converting them to integers.</doc>
+<status status="PASS" start="2026-04-28T15:22:12.931835" elapsed="0.000959"/>
+</kw>
+<kw name="Set Variable" owner="BuiltIn">
+<msg time="2026-04-28T15:22:12.934388" level="INFO">${body} = {'code': 200, 'type': 'unknown', 'message': '55'}</msg>
+<var>${body}</var>
+<arg>${response.json()}</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<status status="PASS" start="2026-04-28T15:22:12.933490" elapsed="0.000939"/>
+</kw>
+<kw name="Log To Console" owner="BuiltIn">
+<arg>${body}</arg>
+<doc>Logs the given message to the console.</doc>
+<status status="PASS" start="2026-04-28T15:22:12.935021" elapsed="0.000677"/>
+</kw>
+<doc>Updates a pet in the store with form data</doc>
+<status status="PASS" start="2026-04-28T15:22:11.496833" elapsed="1.439465"/>
+</test>
+<test id="s1-t6" name="Delete Pet" line="91">
+<kw name="Create Session" owner="RequestsLibrary">
+<msg time="2026-04-28T15:22:12.938948" level="INFO">Creating Session using : alias=petapi, url=https://petstore.swagger.io/v2, headers={},                     cookies={}, auth=None, timeout=None, proxies=None, verify=True,                     debug=0 </msg>
+<arg>petapi</arg>
+<arg>${BASE_URL}</arg>
+<arg>verify=True</arg>
+<doc>Create Session: create a HTTP session to a server</doc>
+<status status="PASS" start="2026-04-28T15:22:12.938664" elapsed="0.000495"/>
+</kw>
+<kw name="DELETE On Session" owner="RequestsLibrary">
+<msg time="2026-04-28T15:22:15.383398" level="INFO">DELETE Request : url=https://petstore.swagger.io/v2/pet/55 
+ path_url=/v2/pet/55 
+ headers={'User-Agent': 'python-requests/2.32.4', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'Content-Length': '0'} 
+ body=None 
+ </msg>
+<msg time="2026-04-28T15:22:15.383526" level="INFO">DELETE Response : url=https://petstore.swagger.io/v2/pet/55 
+ status=200, reason=OK 
+ headers={'Date': 'Tue, 28 Apr 2026 09:52:14 GMT', 'Content-Type': 'application/json', 'Transfer-Encoding': 'chunked', 'Connection': 'keep-alive', 'Access-Control-Allow-Origin': '*', 'Access-Control-Allow-Methods': 'GET, POST, DELETE, PUT', 'Access-Control-Allow-Headers': 'Content-Type, api_key, Authorization', 'Server': 'Jetty(9.2.9.v20150224)'} 
+ body={"code":200,"type":"unknown","message":"55"} 
+ </msg>
+<msg time="2026-04-28T15:22:15.383786" level="INFO">${response} = &lt;Response [200]&gt;</msg>
+<var>${response}</var>
+<arg>petapi</arg>
+<arg>/pet/${PET_ID}</arg>
+<doc>Sends a DELETE request on a previously created HTTP Session.</doc>
+<status status="PASS" start="2026-04-28T15:22:12.939553" elapsed="2.444296"/>
+</kw>
+<kw name="Should Be Equal As Integers" owner="BuiltIn">
+<msg time="2026-04-28T15:22:15.385220" level="INFO">Argument types are:
+&lt;class 'int'&gt;
+&lt;class 'str'&gt;</msg>
+<arg>${response.status_code}</arg>
+<arg>200</arg>
+<doc>Fails if objects are unequal after converting them to integers.</doc>
+<status status="PASS" start="2026-04-28T15:22:15.384359" elapsed="0.001554"/>
+</kw>
+<kw name="Set Variable" owner="BuiltIn">
+<msg time="2026-04-28T15:22:15.388174" level="INFO">${body} = {'code': 200, 'type': 'unknown', 'message': '55'}</msg>
+<var>${body}</var>
+<arg>${response.json()}</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<status status="PASS" start="2026-04-28T15:22:15.387190" elapsed="0.001061"/>
+</kw>
+<kw name="Log To Console" owner="BuiltIn">
+<arg>${body}</arg>
+<doc>Logs the given message to the console.</doc>
+<status status="PASS" start="2026-04-28T15:22:15.390201" elapsed="0.000836"/>
+</kw>
+<doc>Deletes a pet by ID</doc>
+<status status="PASS" start="2026-04-28T15:22:12.938069" elapsed="2.454069"/>
+</test>
+<status status="PASS" start="2026-04-28T15:22:02.726883" elapsed="12.666934"/>
+</suite>
+<statistics>
+<total>
+<stat pass="6" fail="0" skip="0">All Tests</stat>
+</total>
+<tag>
+</tag>
+<suite>
+<stat name="Pet" id="s1" pass="6" fail="0" skip="0">Pet</stat>
+</suite>
+</statistics>
+<errors>
+</errors>
+</robot>
